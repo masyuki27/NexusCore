@@ -1,0 +1,36 @@
+{
+  "type": "nexus_core:mixed_vein",
+  "config": {
+    "blocks": [
+      {
+        "state": {
+          "Name": "nexus_core:magnetite_ore"
+        },
+        "weight": 30
+      },
+      {
+        "state": {
+          "Name": "nexus_core:hematite_ore"
+        },
+        "weight": 20
+      },
+      {
+        "state": {
+          "Name": "nexus_core:silicastone_ore"
+        },
+        "weight": 20
+      },
+      {
+        "state": {
+          "Name": "minecraft:stone"
+        },
+        "weight": 30
+      }
+    ],
+    "radius": 7,
+    "target": {
+      "predicate_type": "minecraft:tag_match",
+      "tag": "minecraft:stone_ore_replaceables"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "block.nexus_core.hematite_ore": "Hematite Ore",
+  "block.nexus_core.magnetite_ore": "Magnetite Ore",
+  "block.nexus_core.silicastone_ore": "Silicastone Ore",
+
+  "item.nexus_core.raw_hematite": "Raw Hematite",
+  "item.nexus_core.raw_magnetite": "Raw Magnetite",
+  "item.nexus_core.raw_Silicastone": "Raw Silicastone",
+
+  "creativetab.nexus_ore": "Nexus Ore"
+}

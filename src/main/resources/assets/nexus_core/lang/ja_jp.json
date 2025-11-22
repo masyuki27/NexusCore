@@ -1,0 +1,11 @@
+{
+  "block.nexus_core.hematite_ore": "赤鉄鉱",
+  "block.nexus_core.magnetite_ore": "磁鉄鉱",
+  "block.nexus_core.silicastone_ore": "珪石鉱",
+
+  "item.nexus_core.raw_hematite": "赤鉄鉱の原石",
+  "item.nexus_core.raw_magnetite": "磁鉄鉱の原石",
+  "item.nexus_core.raw_Silicastone": "珪石の原石",
+
+  "creativetab.nexus_ore": "Nexusな鉱石"
+}

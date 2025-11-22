@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "nexus_core:block/hematite_ore"
+    }
+  }
+}
