@@ -4,6 +4,9 @@ import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 
@@ -42,6 +45,34 @@ public class MixedVeinFeature extends Feature<MixedVeinConfiguration> {
                 }
             }
         }
+
+        if (placedAny) {
+            placeSurfaceIndicators(level, center, config, random);
+        }
         return placedAny;
+    }
+
+    private void placeSurfaceIndicators(WorldGenLevel level, BlockPos center, MixedVeinConfiguration config, RandomSource random) {
+        int count = 3 + random.nextInt(4);
+
+        int spread = 5;
+
+        for (int i = 0; i < count; i++) {
+            int dx = random.nextInt(spread * 2 + 1) - spread;
+            int dz = random.nextInt(spread * 2 + 1) - spread;
+
+            int targetX = center.getX() + dx;
+            int targetZ = center.getZ() + dz;
+
+            int surfaceY = level.getHeight(Heightmap.Types.OCEAN_FLOOR_WG, targetX, targetZ);
+
+            BlockPos surfacePos = new BlockPos(targetX, surfaceY, targetZ);
+
+            BlockState groundState = level.getBlockState(surfacePos.below());
+
+            if (groundState.isSolid() && level.getBlockState(surfacePos).canBeReplaced()) {
+                level.setBlock(surfacePos, config.indicator, 2);
+            }
+        }
     }
 }

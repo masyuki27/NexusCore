@@ -12,8 +12,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.placement.*;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import net.minecraftforge.common.world.BiomeModifier;
@@ -27,34 +25,34 @@ import nexus_core.common.world.featute.MixedVeinConfiguration;
 import java.util.List;
 
 public class NCoreWorldGenProvider {
-    public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_MIXED_ORE_KEY =
-            ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation(NexusCore.MOD_ID, "overworld_mixed_ore"));
 
-    public static final ResourceKey<PlacedFeature> OVERWORLD_MIXED_ORE_PLACED_KEY =
-            ResourceKey.create(Registries.PLACED_FEATURE, new ResourceLocation(NexusCore.MOD_ID, "overworld_mixed_ore"));
-
-    public static final ResourceKey<BiomeModifier> ADD_MIXED_ORE_KEY =
-            ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS, new ResourceLocation(NexusCore.MOD_ID, "add_mixed_ore"));
+    //BIF
+    public static final ResourceKey<ConfiguredFeature<?, ?>> BIF_VEIN_KEY =
+            ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation(NexusCore.MOD_ID, "bif_vein"));
+    public static final ResourceKey<PlacedFeature> BIF_VEIN_PLACED_KEY =
+            ResourceKey.create(Registries.PLACED_FEATURE, new ResourceLocation(NexusCore.MOD_ID, "bif_vein"));
+    public static final ResourceKey<BiomeModifier> ADD_BIF_VEIN_KEY =
+            ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS, new ResourceLocation(NexusCore.MOD_ID, "add_bif_vein"));
 
     public static void bootstrapConfigured(BootstapContext<ConfiguredFeature<?, ?>> context) {
+        //bif
         var stoneReplaceables = new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES);
-
         var oreMix = List.of(
                 new MixedVeinConfiguration.WeightedBlockState(NCoreBlocks.Blocks.MAGNETITE_ORE.get().defaultBlockState(), 30),
                 new MixedVeinConfiguration.WeightedBlockState(NCoreBlocks.Blocks.HEMATITE_ORE.get().defaultBlockState(), 20),
                 new MixedVeinConfiguration.WeightedBlockState(NCoreBlocks.Blocks.SILICASTONE_ORE.get().defaultBlockState(), 20),
                 new MixedVeinConfiguration.WeightedBlockState(Blocks.STONE.defaultBlockState(),30)
         );
+        var bif_config = new MixedVeinConfiguration(stoneReplaceables, 7, oreMix, NCoreBlocks.Blocks.MAGNETITE_ORE.get().defaultBlockState());
+        context.register(BIF_VEIN_KEY, new ConfiguredFeature<> (NCoreFeatures.MIXED_VEIN.get(), bif_config));
 
-        var config = new MixedVeinConfiguration(stoneReplaceables, 7, oreMix);
 
-        context.register(OVERWORLD_MIXED_ORE_KEY, new ConfiguredFeature<> (NCoreFeatures.MIXED_VEIN.get(), config));
     }
 
     public static void bootstrapPlaced(BootstapContext<PlacedFeature> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
 
-        context.register(OVERWORLD_MIXED_ORE_PLACED_KEY, new PlacedFeature(configuredFeatures.getOrThrow(OVERWORLD_MIXED_ORE_KEY),
+        context.register(BIF_VEIN_PLACED_KEY, new PlacedFeature(configuredFeatures.getOrThrow(BIF_VEIN_KEY),
                 List.of(
                         RarityFilter.onAverageOnceEvery(5),
                         HeightRangePlacement.uniform(VerticalAnchor.absolute(10), VerticalAnchor.absolute(80)),
@@ -68,9 +66,9 @@ public class NCoreWorldGenProvider {
         var placedFeatures = context.lookup(Registries.PLACED_FEATURE);
         var biomes = context.lookup(Registries.BIOME);
 
-        context.register(ADD_MIXED_ORE_KEY, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(biomes.getOrThrow(BiomeTags.IS_OVERWORLD),
+        context.register(ADD_BIF_VEIN_KEY, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(biomes.getOrThrow(BiomeTags.IS_OVERWORLD),
 
-                HolderSet.direct(placedFeatures.getOrThrow(OVERWORLD_MIXED_ORE_PLACED_KEY)),
+                HolderSet.direct(placedFeatures.getOrThrow(BIF_VEIN_PLACED_KEY)),
                 GenerationStep.Decoration.UNDERGROUND_ORES));
     }
 }

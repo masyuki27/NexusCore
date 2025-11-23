@@ -27,6 +27,9 @@
         "weight": 30
       }
     ],
+    "indicator": {
+      "Name": "nexus_core:magnetite_ore"
+    },
     "radius": 7,
     "target": {
       "predicate_type": "minecraft:tag_match",

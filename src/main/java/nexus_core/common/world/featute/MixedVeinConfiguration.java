@@ -14,17 +14,20 @@ public class MixedVeinConfiguration implements FeatureConfiguration {
             RecordCodecBuilder.create(instance -> instance.group(
                     RuleTest.CODEC.fieldOf("target").forGetter(c -> c.target),
                     Codec.INT.fieldOf("radius").forGetter(c -> c.radius),
-                    WeightedBlockState.CODEC.listOf().fieldOf("blocks").forGetter(c -> c.blocks)
+                    WeightedBlockState.CODEC.listOf().fieldOf("blocks").forGetter(c -> c.blocks),
+                    BlockState.CODEC.fieldOf("indicator").forGetter(c -> c.indicator)
             ).apply(instance, MixedVeinConfiguration::new));
 
     public final RuleTest target;
     public final int radius;
     public final List<WeightedBlockState> blocks;
+    public final BlockState indicator;
 
-    public MixedVeinConfiguration(RuleTest target, int radius, List<WeightedBlockState> blocks) {
+    public MixedVeinConfiguration(RuleTest target, int radius, List<WeightedBlockState> blocks, BlockState indicator) {
         this.target = target;
         this.radius = radius;
         this.blocks = blocks;
+        this.indicator = indicator;
     }
 
     public BlockState getRandomBlock(RandomSource random) {

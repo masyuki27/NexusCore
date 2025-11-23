@@ -1,6 +1,6 @@
 {
   "type": "forge:add_features",
   "biomes": "#minecraft:is_overworld",
-  "features": "nexus_core:overworld_mixed_ore",
+  "features": "nexus_core:bif_vein",
   "step": "underground_ores"
 }
