@@ -1,4 +1,4 @@
-// 1.20.1	2025-11-22T22:18:44.880754	Registries
-054fdc60f0cc893a7aa69702bfcb087bdf06b939 data/nexus_core/forge/biome_modifier/add_mixed_ore.json
-67c28eb6cd8ccbcab348f678602e93301f509612 data/nexus_core/worldgen/configured_feature/overworld_mixed_ore.json
-bfe094a86a0b648cf2f31b6170f61997bf45eb44 data/nexus_core/worldgen/placed_feature/overworld_mixed_ore.json
+// 1.20.1	2025-11-24T08:28:09.7558764	Registries
+269cbfea76aae9b92854455706e5c47753e5031c data/nexus_core/forge/biome_modifier/add_bif_vein.json
+cccbcbc3dd6910332e09238521ce16fa44d5259b data/nexus_core/worldgen/configured_feature/bif_vein.json
+dda4db40d4c13b6b84e74d73031ec92fa56ad957 data/nexus_core/worldgen/placed_feature/bif_vein.json
